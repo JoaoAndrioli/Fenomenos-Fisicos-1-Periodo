@@ -1,0 +1,102 @@
+	<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="ico.png">
+		<title>Trabalho (Halliday)</title>
+		<link rel="stylesheet" type="text/css" href="Blocos.css">
+		<style>
+        	#meucanvas{
+        	background-color:black;
+        	margin-left: -450px;
+        	position: absolute;
+        	left: 50%;
+	    	top: 50%;
+		}
+		</style>
+	</head>
+	<body>
+		<form name="meuForm" method="post" id="Funcao1" action="">
+			<div class="box">
+				<h1>Trabalho (Halliday):</h1>
+				<p align="center">
+				Dois espiões industriais arrastam um cofre de 225Kg a partir do repouso e assim produzindo um deslocamento d de módulo 8,50 m em direção 
+				a um caminhão. O empurrão F_1 do espião 001 tem um módulo de 12,0 N e faz um ângulo de 30,0º para baixo com a horizontal; o puxão F_2 do 
+				espião 002 tem um módulo de 10,0N e faz um ângulo de 40,0º para cima com a horizontal. Os módulos e orientações das forças não variam quando 
+				o cofre se desloca e o atrito entre o cofre e o atrito com o piso é desprezível.
+				</p>
+				<label>
+					<span>Massa<br>(m)</span>
+					<input type="text" class="input_text" name="primeiro_valor" id="valor_1"/>
+				</label>
+				<label>
+					<span>Força_1<br>(N)</span>
+					<input type="text" class="input_text" name="segundo_valor" id="valor_2"/>
+				</label>
+				<label>
+					<span>Força_2<br>(N)</span>
+					<input type="text" class="input_text" name="segundo_valor" id="valor_3"/>
+				</label>
+				<label>
+					<span>Deslocamento</span>
+					<input type="text" class="input_text" name="terceiro_valor" id="valor_4"/>
+				</label>
+				<label>
+					<span>Angulo_1<br>(Graus)</span>
+					<input type="text" class="input_text" name="quarto_valor" id="valor_5"/>
+				</label>
+				<label>
+					<span>Angulo_2<br>(Graus)</span>
+					<input type="text" class="input_text" name="quarto_valor" id="valor_6"/>
+				</label>
+				<label>
+				<input type="button" class="button" onclick="Funcao_1()" value="Calcular" />
+				<a href="menu.html"><input type="button" class="button1"  value="Menu" /></a>
+				</label>
+				<p id="velocidade"></p>
+			</div>
+		</form>
+	</body>
+	 <script>
+	 function random_bg_color() {
+	     var x = Math.floor(Math.random() * 256);
+	     var y = Math.floor(Math.random() * 256);
+	     var z = Math.floor(Math.random() * 256);
+	     var bgColor = "rgb(" + x + "," + y + "," + z + ")";
+	  		console.log(bgColor);
+
+	     document.body.style.background = bgColor;
+	     }
+
+	 random_bg_color();
+
+
+
+      function Funcao_1(){
+
+		//cria as variaveis
+        var valor_1 = parseFloat( document.getElementById("valor_1").value );
+        var valor_2 = parseFloat( document.getElementById("valor_2").value );
+        var valor_3 = parseFloat( document.getElementById("valor_3").value );
+        var valor_4 = parseFloat( document.getElementById("valor_4").value );
+	    var valor_5 = parseFloat( document.getElementById("valor_5").value );
+        var valor_6 = parseFloat( document.getElementById("valor_6").value );
+
+        if(isNaN(valor_1) || isNaN(valor_2)  || isNaN(valor_3) || isNaN(valor_4) || isNaN(valor_5) || isNaN(valor_6) ){
+		
+		document.getElementById("velocidade").innerHTML = "Entre com todos os valores!";
+
+		}else{
+
+		var Trabalho_1 = valor_2 * valor_4 * Math.cos((valor_5 * Math.PI )/ 180);
+		var Trabalho_2 = valor_3 * valor_4 * Math.cos((valor_6 * Math.PI )/ 180);
+		var trabalho_3 = Trabalho_1 + Trabalho_2;
+
+		//printa o resultado
+		document.getElementById("velocidade").innerHTML = "O trabalho total é: " + trabalho_3.toFixed(3) + " Joules";
+
+
+
+      }}
+    </script>
+</html>

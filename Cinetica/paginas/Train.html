@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="ico.png">
+		<title>Exercicio do Trem(Halliday)</title>
+		<link rel="stylesheet" type="text/css" href="Blocos.css">
+		<style>
+        	#meucanvas{
+        	background-color:black;
+        	margin-left: -450px;
+        	position: absolute;
+        	left: 50%;
+	    	top: 50%;
+		}
+		</style>
+	</head>
+	<body>
+		<form name="meuForm" method="post" id="Funcao1" action="">
+			<div class="box3">
+				<h1>Exercicio do Trem (Halliday):</h1>
+			<p align="center">Em 1896, em Waco, Texas, William Crush posicionou duas locomotivas em extremidades opostas de uma linha férrea com 6,4 km de 
+			extensão, acendeu as caldeiras, amarrou os aceleradores para que permanecessem adicionados e fez com que as locomotivas sofressem uma colisão 
+			frontal. Supondo que cada locomotiva pesava 1.2 x 10^6 N e tinha uma aceleração constante de 0.26 m/s², qual era a energia cinética das duas 
+			locomotivas imediatamente antes da colisão?
+				</p>
+				<label>
+					<span>Massa_1</span>
+					<span3><input type="text" class="input_text" name="Massa_1" id="Massa_1"/></span3>
+
+					<span2>Massa_2</span2>	
+					<span2><input type="text" class="input_text" name="Massa_2" id="Massa_2"/></span2>
+				</label>
+				<label></label>
+				<label>		
+
+					<span>Aceleração_1</span>
+					<span3><input type="text" class="input_text" name="Aceleração_1" id="Aceleração_1"/></span3>				
+
+					<span2>Aceleração_2</span2>
+					<span2><input type="text" class="input_text" name="Aceleração_2" id="Aceleração_2"/></span2>
+				</label>
+				<label></label>
+				<label>			
+					<span>Velocidade_inicial_1</span>
+					<span3><input type="text" class="input_text" name="Velocidade_Inicial_1" id="Velocidade_Inicial_1"/></span3>
+					
+					<span2>Velocidade_inicial_2</span2>
+					<span2><input type="text" class="input_text" name="Velocidade_Inicial_2" id="Velocidade_Inicial_2"/></span2>
+
+				</label>
+				<label></label>
+				<label>
+					<span>Deslocamento_1</span>
+					<span3><input type="text" class="input_text" name="Deslocamento_1" id="Deslocamento_1"/></span3>
+
+					<span2>Deslocamento_2</span2>
+					<span2><input type="text" class="input_text" name="Deslocamento_2" id="Deslocamento_2"/></span2>
+				</label>
+				<label></label>
+				<label>
+				<input type="button" class="button6" onclick="Funcao_1()" value="Calcular" />
+				<a href="menu.html"><input type="button" class="button5"  value="Menu" /></a>
+				</label>
+				<p id="velocidade"></p>
+			</div>
+		</form>
+	</body>
+	 <script>
+	 function random_bg_color() {
+	     var x = Math.floor(Math.random() * 256);
+	     var y = Math.floor(Math.random() * 256);
+	     var z = Math.floor(Math.random() * 256);
+	     var bgColor = "rgb(" + x + "," + y + "," + z + ")";
+	  		console.log(bgColor);
+
+	     document.body.style.background = bgColor;
+	     }
+
+	 random_bg_color();
+
+
+
+      function Funcao_1(){
+
+		//cria as variaveis
+        var Massa_1 = parseFloat( document.getElementById("Massa_1").value );
+        var Velocidade_Inicial_1 = parseFloat( document.getElementById("Velocidade_Inicial_1").value );
+        var Aceleração_1 = parseFloat( document.getElementById("Aceleração_1").value );
+        var Deslocamento_1 = parseFloat( document.getElementById("Deslocamento_1").value );
+
+        var Massa_2 = parseFloat( document.getElementById("Massa_2").value );
+        var Velocidade_Inicial_2 = parseFloat( document.getElementById("Velocidade_Inicial_2").value );
+        var Aceleração_2 = parseFloat( document.getElementById("Aceleração_2").value );
+        var Deslocamento_2 = parseFloat( document.getElementById("Deslocamento_2").value );
+
+
+        if(isNaN(Velocidade_Inicial_1) || isNaN(Aceleração_1)  || isNaN(Massa_1) || isNaN(Deslocamento_1) || isNaN(Massa_2) || isNaN(Deslocamento_2) || isNaN(Velocidade_Inicial_2)  || isNaN(Aceleração_2) ){
+		
+		document.getElementById("velocidade").innerHTML = "Entre com todos os valores!";
+
+		}else{
+
+		//calcula a velocidade final
+		var velocidade_final_1 = Math.sqrt(Math.pow(Velocidade_Inicial_1,2) + ((2*Aceleração_1) * Deslocamento_1));
+		var velocidade_final_2 = Math.sqrt(Math.pow(Velocidade_Inicial_2,2) + ((2*Aceleração_2) * Deslocamento_2));
+
+		var Energia_Cinetica_1 = (Math.pow(velocidade_final_1,2) * Massa_1) / 2;
+		var Energia_Cinetica_2 = (Math.pow(velocidade_final_2,2) * Massa_2) / 2;
+
+
+		//tira algumas casas decimais
+		//var numero = velocidade+""
+		//numero = parseInt(numero*100)/100
+		//var numero1 = velocidadems.toFixed(3)
+		//var calorias = numero * 0.2388
+
+
+
+		//printa o resultado
+		document.getElementById("velocidade").innerHTML = "A Energia Cinetica do corpo 1 logo antes do impacto é de: " + Energia_Cinetica_1.toFixed(2) + " Joules; e a do corpo 2 é de " + Energia_Cinetica_2.toFixed(2) + " Joules<br>" + "A Energia Cinetica Total no sistema é de : " + (Energia_Cinetica_1 + Energia_Cinetica_2).toFixed(2) + " Joules";
+
+
+
+      }}
+    </script>
+</html>

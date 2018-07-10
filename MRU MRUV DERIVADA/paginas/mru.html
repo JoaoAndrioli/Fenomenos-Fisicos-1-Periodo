@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="ico.png">
+		<title>MRU</title>
+		<link rel="stylesheet" type="text/css" href="Blocos.css">
+		<style>
+        	#meucanvas{
+        	background-color:black;
+        	margin-left: -450px;
+        	position: absolute;
+        	left: 50%;
+	    	top: 50%;
+		}
+		</style>
+	</head>
+	<body>
+		<canvas id="meucanvas" height="300" width="900" >O seu Browser nao suporta este elemento</canvas>
+		<form name="meuForm" method="post" id="Funcao1" action="">
+			<div class="box">
+				<h1>MRU :</h1>
+				<label>
+					<span>Espaço percorrido<br>(Km)</span>
+					<input type="text" class="input_text" name="primeiro_valor" id="valor_1"/>
+				</label>
+				<label>
+					<span>Intervalo de tempo<br>(Hora)</span>
+					<input type="text" class="input_text" name="segundo_valor" id="valor_2"/>
+				</label>
+				<label>
+				<input type="button" class="button" onclick="Funcao_1()" value="Calcular" />
+				<a href="mruv.html"><input type="button" class="button2"  value="MRUV" /></a>
+				<a href="menu.html"><input type="button" class="button3"  value="Menu" /></a>
+				</label>
+				<p id="velocidade"></p>
+			</div>
+		</form>
+	</body>
+	 <script>
+	 function random_bg_color() {
+	     var x = Math.floor(Math.random() * 256);
+	     var y = Math.floor(Math.random() * 256);
+	     var z = Math.floor(Math.random() * 256);
+	     var bgColor = "rgb(" + x + "," + y + "," + z + ")";
+	  		console.log(bgColor);
+
+	     document.body.style.background = bgColor;
+	     }
+
+	 random_bg_color();
+
+		var canvas = document.getElementById("meucanvas");
+		var ctx = canvas.getContext("2d");
+
+
+      function Funcao_1(){
+
+		//cria as variaveis
+        var valor_1 = parseFloat( document.getElementById("valor_1").value );
+        var valor_2 = parseFloat( document.getElementById("valor_2").value );
+
+		if(valor_1 <=  0|| valor_2 <= 0){
+
+		}else{
+		//calcula a velocidade media
+		var velocidade = (valor_1 / valor_2) ;
+		var velocidadems = (valor_1 / valor_2) / 3.6 ;
+
+		//tira algumas casas decimais
+		var numero = velocidade+""
+		numero = parseInt(numero*100)/100
+		var numero1 = velocidadems.toFixed(3)
+
+		//printa o resultado
+		document.getElementById("velocidade").innerHTML = "A velocidade média é de: " + numero + "Km/h ou "+ numero1 + "m/s.";
+
+
+
+		ctx.strokeStyle = "white";
+		ctx.beginPath();
+
+		ctx.moveTo(30,270); // grafico 1 vertical
+		ctx.lineTo(30,30);
+
+		ctx.moveTo(30,270); // grafico 1 horizontal
+		ctx.lineTo(390,270);
+
+		ctx.moveTo(450,270); // grafico 2 vertical
+		ctx.lineTo(450,30);
+
+		ctx.moveTo(450,270); // grafico 2 horizontal
+		ctx.lineTo(870,270);
+
+
+		ctx.moveTo(30,270);
+		ctx.lineTo(390,30);
+
+		//ctx.moveTo(450,270);
+		//ctx.lineTo(870,30);
+
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+		ctx.font = "15px arial";
+		ctx.fillStyle = "white";
+		ctx.fillText("Posição(Km)",10,20);           //escrita graficos
+		ctx.fillText("Velocidade(Km/h)",430,20);
+		ctx.fillText("Tempo(h)",350,290);
+		ctx.fillText("Tempo(h)",830,290);
+
+		ctx.fillText(valor_1.toFixed(2),35,40);
+		ctx.fillText(((valor_1 / 3) * 2).toFixed(2),35,120);    //grafico 1 vertical
+		ctx.fillText((valor_1 / 3).toFixed(2),35,200);
+
+		ctx.fillText(valor_2.toFixed(2),380,260);
+		ctx.fillText(((valor_2 / 3) * 2).toFixed(2),260,260);     //grafico 1 horizontal
+		ctx.fillText((valor_2 / 3).toFixed(2),140,260);
+
+		ctx.fillText(valor_2.toFixed(2),860,260);
+		ctx.fillText(((valor_2 / 3) * 2).toFixed(2),720,260);     //grafico 2 horizontal
+		ctx.fillText((valor_2 / 3).toFixed(2),580,260);
+
+		ctx.fillText(0,20,280);    // os zeros dos graficos
+
+		var localy = 0;
+		if(velocidade < 5){
+		ctx.moveTo(450,160);
+		ctx.lineTo(870,160);
+		ctx.fillText((velocidade * 2).toFixed(3),455,45);
+		ctx.fillText((velocidade * 1.5).toFixed(3),455,105);
+		ctx.fillText(velocidade.toFixed(3),455,165);    //grafico 1 vertical
+		ctx.fillText((velocidade / 2).toFixed(3),455,225);
+		ctx.fillText(0,440,280);
+		}else{
+			for(var i = 0;i < 100000; i++){
+				if(velocidade > i*5 && velocidade <= (i*5)+5){
+					ctx.fillText(((i*5)+10).toFixed(3),455,45);
+					ctx.fillText(((i*5)+5).toFixed(3),455,105);
+					ctx.fillText((i*5).toFixed(3),455,165);     //grafico 1 vertical
+					ctx.fillText(((i*5)-5).toFixed(3),455,225);
+
+					localy = (240/20) * (velocidade - (i*5)-10) - 37 ;
+					ctx.moveTo(450,-localy);
+					ctx.lineTo(870,-localy);
+					i = 99999;
+				}
+			}
+		}
+
+
+		ctx.stroke();
+
+      }}
+    </script>
+</html>

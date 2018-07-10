@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" href="ico.png">
+	<title>MRUV</title>
+	<link rel="stylesheet" type="text/css" href="Blocos.css">
+		<style>
+        	#meucanvas{
+        	background-color:black;
+        	margin-left: -450px;
+        	position: absolute;
+        	left: 50%;
+	    	top: 60%;
+		}
+		</style>
+</head>
+<body>
+	<canvas id="meucanvas" height="300" width="900" >O seu Browser nao suporta este elemento</canvas>
+	<form name="meuForm" method="post" id="Funcao1" action="">
+		<div class="box">
+			<h1>MRUV :</h1>
+				<label>
+					<span>Velocidade inicial<br>(m/s)</span>
+					<input type="text" class="input_text" name="primeiro_valor" id="valor_1"/>
+				</label>
+				<label>
+					<span>Aceleração<br>(m/s²)</span>
+					<input type="text" class="input_text" name="segundo_valor" id="valor_2"/>
+				</label>
+				<label>
+					<span>Tempo<br>(Segundos)</span>
+					<input type="text" class="input_text" name="terceiro_valor" id="valor_3"/>
+				</label>
+			<label>
+				<input type="button" class="button" onclick="Funcao_1()" value="Calcular" />
+				<a href="mru.html"><input type="button" class="button2"  value="MRU" /></a>
+				<a href="menu.html"><input type="button" class="button3"  value="Menu" /></a>
+			</label>
+			<p id="velocidade"></p>
+		</div>
+	</form>
+</body>
+<script>
+function random_bg_color() {
+    var x = Math.floor(Math.random() * 256);
+    var y = Math.floor(Math.random() * 256);
+    var z = Math.floor(Math.random() * 256);
+    var bgColor = "rgb(" + x + "," + y + "," + z + ")";
+ 		console.log(bgColor);
+
+    document.body.style.background = bgColor;
+    }
+
+random_bg_color();
+		var canvas = document.getElementById("meucanvas");
+		var ctx = canvas.getContext("2d");
+
+		function Funcao_1(){
+			var valor_1 = parseFloat( document.getElementById("valor_1").value );
+			var valor_2 = parseFloat( document.getElementById("valor_2").value );
+			var valor_3 = parseFloat( document.getElementById("valor_3").value );
+
+		if(valor_1 < 0 || valor_3 < 0){
+
+		}else{
+
+		//calcula a velocidade media
+		var velocidade = (valor_1 + (valor_2 * valor_3)) ;
+		var velocidadems = (valor_1 + (valor_2 * valor_3)) * 3.6 ;
+
+		//tira algumas casas decimais
+		var numero = velocidade+""
+		numero = parseInt(numero*100)/100
+		var numero1 = velocidadems+""
+		numero1 = parseInt(numero1*100)/100
+
+		var posicaofinal = valor_1 * valor_3 + (valor_2*(Math.pow(valor_3, 2)))/2;
+		var posicaofina = posicaofinal.toFixed(2);
+
+		//printa o resultado
+		document.getElementById("velocidade").innerHTML = "A velocidade final é de: " + numero + "m/s ou "+ numero1 + "Km/h." + "<br>A posição final é de: " + posicaofina + "m.";
+
+		ctx.strokeStyle = "white";
+		ctx.beginPath();
+
+		ctx.moveTo(30,270); // grafico 1 vertical
+		ctx.lineTo(30,30);
+
+		ctx.moveTo(30,270); // grafico 1 horizontal
+		ctx.lineTo(390,270);
+
+		ctx.moveTo(450,270); // grafico 2 vertical
+		ctx.lineTo(450,30);
+
+		ctx.moveTo(450,270); // grafico 2 horizontal
+		ctx.lineTo(870,270);
+
+
+
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.font = "15px arial";
+		ctx.fillStyle = "white";
+
+		ctx.fillText("Posição(m)",10,20);           //escrita graficos
+		ctx.fillText("Velocidade(m/s)",430,20);
+		ctx.fillText("Tempo(s)",350,290);
+		ctx.fillText("Tempo(s)",830,290);
+
+		ctx.fillText(posicaofinal.toFixed(2),35,40);
+		ctx.fillText(((posicaofinal / 3) * 2).toFixed(2),35,120);    //grafico 1 vertical
+		ctx.fillText((posicaofinal / 3).toFixed(2),35,200);
+
+		ctx.fillText(valor_3.toFixed(2),380,260);
+		ctx.fillText(((valor_3 / 3) * 2).toFixed(2),260,260);     //grafico 1 horizontal
+		ctx.fillText((valor_3 / 3).toFixed(2),140,260);
+
+		ctx.fillText(valor_3.toFixed(2),860,260);
+		ctx.fillText(((valor_3/ 3) * 2).toFixed(2),720,260);     //grafico 2 horizontal
+		ctx.fillText((valor_3 / 3).toFixed(2),580,260);
+
+		ctx.fillText(0,20,280);    // 0 grafico 1
+
+		var locay = 270;
+		if(valor_2 <= 0){
+			ctx.fillText((velocidade ).toFixed(3),455,45);
+			ctx.fillText((((velocidade + valor_1)/ 4 ) * 2 ).toFixed(3),455,165);    //grafico 2 vertical
+			ctx.fillText(valor_1,455,265);	// 0 grafico 2
+
+			ctx.moveTo(450,270);
+			ctx.lineTo(870,30);
+		}else{
+			ctx.fillText((velocidade).toFixed(3),455,40);
+			ctx.fillText(((velocidade / 4 ) * 3 ).toFixed(3),455,100);
+			ctx.fillText(((velocidade / 4 ) * 2 ).toFixed(3),455,160);    //grafico 2 vertical
+			ctx.fillText((velocidade / 4).toFixed(3),455,220);
+			ctx.fillText(0,440,280);	// 0 grafico 2
+
+			locay = 270 - (240 * (valor_1 / velocidade));
+			ctx.moveTo(450,locay);
+			ctx.lineTo(870,30);
+		}
+		ctx.fillText("Vo",430,locay);
+
+		ctx.stroke();
+
+		if(valor_2 >= 0){
+		ctx.beginPath();
+		ctx.moveTo(30,270);
+		ctx.quadraticCurveTo(390,270,390,30);
+		ctx.stroke();
+		}else{
+		ctx.beginPath();
+		ctx.moveTo(30,270);
+		ctx.quadraticCurveTo(30,30,390,30);
+		ctx.stroke();
+		}
+		}}
+//posicaofinal = velocidadeinical * tempo + (aceleraçao*(tempo^2))/2
+//V = Vo + a. t
+//v: velocidade     vo: velocidade inicial     a: aceleração     t: tempo
+
+	</script>
+</html>

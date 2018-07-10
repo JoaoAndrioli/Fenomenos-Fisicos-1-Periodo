@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<style>
+			#meucanvas{
+			background-color:black;
+			margin-left: -450px;
+			position: absolute;
+			left: 50%;
+			top: 600px;
+}
+
+</style>
+	<title>Derivada</title>
+	<link rel="stylesheet" type="text/css" href="Blocos.css">
+	<link rel="icon" href="ico.png">
+</head>
+<body>
+	<canvas id="meucanvas" height="500" width="900" >O seu Browser nao suporta este elemento</canvas>
+	<form name="meuForm" method="post" id="Funcao1" action="">
+		<div class="box">
+	<h3>	<span>1. Qual a derivada da função 7x + 15 ?<br>2. Qual a 1ª derivada da função de posição do MUV caso a velocidade inicial seja 10m/s, a posição inicial seja 0 e a aceleração seja 2m/s²?</span></h3>
+		<img src="deri.png" height="250" width="500" >
+		</div>
+		<div class="box">
+			<h1>Derivada :</h1>
+				<label>
+					&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<input type="text" class="input_text2" name="primeiro_valor" id="valor_1"/>
+					X² +
+					<input type="text" class="input_text2" name="segundo_valor" id="valor_2"/>
+					X +
+					<input type="text" class="input_text2" name="terceiro_valor" id="valor_3"/>
+				</label>
+			<label>
+				<input type="button" class="button" onclick="Funcao_1()" value="Calcular" />
+				<!-- <a href="mru.html"><input type="button" class="button2"  value="MRU" /></a> -->
+				<a href="menu.html"><input type="button" class="button1"  value="Menu" /></a>
+			</label>
+			<p id="derivada"></p>
+		</div>
+
+	</form>
+</body>
+<script>
+
+function random_bg_color() {
+    var x = Math.floor(Math.random() * 256);
+    var y = Math.floor(Math.random() * 256);
+    var z = Math.floor(Math.random() * 256);
+    var bgColor = "rgb(" + x + "," + y + "," + z + ")";
+ 		console.log(bgColor);
+
+    document.body.style.background = bgColor;
+    }
+
+random_bg_color();
+
+		var canvas = document.getElementById("meucanvas");
+		var ctx = canvas.getContext("2d");
+		ctx.strokeStyle = "white";
+
+		function Funcao_1(){
+
+			var valor_1 = parseFloat( document.getElementById("valor_1").value );
+			var valor_2 = parseFloat( document.getElementById("valor_2").value );
+			var valor_3 = parseFloat( document.getElementById("valor_3").value );
+
+			if(isNaN(valor_1)){
+				valor_1 = 0;
+			};
+			if(isNaN(valor_2)){
+				valor_2 = 0;
+			};
+			if(isNaN(valor_3)){
+				valor_3 = 0;
+			};
+			var der1 = 2*valor_1;
+			var der11 = 1*valor_2;
+			var der2 = 1*2*valor_1;
+
+
+		//printa o resultado
+		document.getElementById("derivada").innerHTML = "A 1ª derivada: " + der1 + "x + " + der11 + "<br>A 2ª derivada: " + der2 ;
+
+
+
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.font = "15px arial";
+		ctx.fillStyle = "white";
+
+		ctx.beginPath();    //Linha Y
+		ctx.moveTo(450,0);
+		ctx.lineTo(450,500);
+		ctx.stroke();
+
+		ctx.beginPath();   //Linha X
+		ctx.moveTo(0,250);
+		ctx.lineTo(900,250);
+		ctx.stroke();
+
+		ctx.fillText("Y",455,15);
+		ctx.fillText("X",885,245);
+
+
+
+		for(i = 1;i < 20; i++){ // x axis
+			ctx.beginPath();
+			ctx.moveTo(i * 45,255);
+			ctx.lineTo(i * 45,245);
+			ctx.stroke();
+			if(i < 10){
+				ctx.fillText(i,450 + i * 45,265);
+			}
+		}
+		for(i = -1;i > -10; i--){
+			ctx.fillText(i,445 + i * 45,265);
+		}
+
+		for(i = 1;i < 10; i++){ // y axis
+			ctx.beginPath();
+			ctx.moveTo(445,i * 50);
+			ctx.lineTo(455,i * 50);
+			ctx.stroke();
+			if(i < 5){
+				ctx.fillText(i,430,255 - i * 50);
+			}
+		}
+		for(i = -1;i > -5; i--){
+			ctx.fillText(i,430,255 - i * 50);
+		}
+
+
+
+var valor_4 = valor_1 + valor_2 + valor_3;
+
+
+
+
+
+
+
+
+
+
+AquelaMedia = ((495 + (45/valor_4)) - (405 - (45/valor_4)))/ (500 + (((Math.pow(( valor_2 / valor_1 ), 3) / ( valor_2 / valor_1 )) / 2) * 100) / 2);
+ // ainda nao terminei, falta numero na frente para ser somado
+
+
+
+	if(valor_1 >= 0){
+		if(valor_3 == 0){
+			if(valor_2 == 0){
+				ctx.beginPath();
+				ctx.moveTo(410 - (45/valor_4),0);
+				ctx.quadraticCurveTo(450,500,490 + (45/valor_4),0);
+				ctx.stroke();
+			}else{
+				ctx.beginPath(); // TERMINAR
+				ctx.moveTo((410 - (45/valor_4)) - ((valor_2 / valor_1) * 45),0 - (valor_3 * 50));
+				
+				ctx.quadraticCurveTo(450 - (((valor_2 / valor_1) * 45)/2),480 + (((Math.pow(( valor_2 / valor_1 ), 3) / ( valor_2 / valor_1 )) / ( valor_2 / valor_1 )) * 102) - (valor_3 * 50),490 + (45/valor_4),0 - (valor_3 * 50));
+				
+				ctx.stroke();
+			}
+		}else{
+			if(valor_2 == 0){
+				ctx.beginPath();
+				ctx.moveTo(410 - (45/valor_4),0 - (valor_3 * 50));
+				ctx.quadraticCurveTo(450,500 - (valor_3 * 50),490 + (45/valor_4),0 - (valor_3 * 50));
+				ctx.stroke();
+			}else{
+				ctx.beginPath(); // TERMINAR
+				ctx.moveTo((410 - (45/valor_4)) - ((valor_2 / valor_1) * 45),0 - (valor_3 * 50));
+				
+				ctx.quadraticCurveTo(450 - (((valor_2 / valor_1) * 45)/2),480 + (((Math.pow(( valor_2 / valor_1 ), 3) / ( valor_2 / valor_1 )) / ( valor_2 / valor_1 )) * 102) - (valor_3 * 50),490 + (45/valor_4),0 - (valor_3 * 50));
+				
+				ctx.stroke();
+			}
+		}
+	}else{
+		ctx.beginPath();
+		ctx.moveTo(405 + (45/valor_4),500);
+		ctx.quadraticCurveTo(450,0,495 - (45/valor_4),500);
+		ctx.stroke();
+	}
+	
+	
+		(der11/der1 + 1)  
+		der1 * 50
+
+		ctx.beginPath();
+		ctx.moveTo(540,250 - (der1 + der11) * 50);
+		ctx.lineTo(450 - (der11/der1 + 1) * 50 ,250 + (der1 * 50));
+		ctx.stroke();
+	
+	
+	
+	
+	
+	
+	
+	
+}
+
+	</script>
+</html>

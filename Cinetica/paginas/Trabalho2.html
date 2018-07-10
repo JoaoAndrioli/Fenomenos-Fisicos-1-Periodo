@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="ico.png">
+		<title>Trabalho</title>
+		<link rel="stylesheet" type="text/css" href="Blocos.css">
+		<style>
+        	#meucanvas{
+        	background-color:black;
+        	margin-left: -450px;
+        	position: absolute;
+        	left: 50%;
+	    	top: 50%;
+		}
+		</style>
+	</head>
+	<body>
+		<form name="meuForm" method="post" id="Funcao1" action="">
+			<div class="box">
+				<h1>Trabalho :</h1>
+				<p align="center">Qual o trabalho exercido sobre uma caixa de 200kg, caso um individuo aplique uma forca de 20N paralelamente ao plano do chao?
+				Formula: T = F * (delta)x</p>	
+				<label>
+					<span>Força<br>(N)</span>
+					<input type="text" class="input_text" name="primeiro_valor" id="valor_1"/>
+				</label>
+				<label>
+					<span>Deslocamento</span>
+					<input type="text" class="input_text" name="segundo_valor" id="valor_2"/>
+				</label>
+				<label>
+					<span>Angulo<br>(Graus)</span>
+					<input type="text" class="input_text" name="terceiro_valor" id="valor_3"/>
+				</label>
+				<label>
+				<input type="button" class="button" onclick="Funcao_1()" value="Calcular" />
+				<a href="menu.html"><input type="button" class="button1"  value="Menu" /></a>
+				</label>
+				<p id="velocidade"></p>
+			</div>
+		</form>
+	</body>
+	 <script>
+	 function random_bg_color() {
+	     var x = Math.floor(Math.random() * 256);
+	     var y = Math.floor(Math.random() * 256);
+	     var z = Math.floor(Math.random() * 256);
+	     var bgColor = "rgb(" + x + "," + y + "," + z + ")";
+	  		console.log(bgColor);
+
+	     document.body.style.background = bgColor;
+	     }
+
+	 random_bg_color();
+
+
+
+      function Funcao_1(){
+
+		//cria as variaveis
+        var valor_1 = parseFloat( document.getElementById("valor_1").value );
+        var valor_2 = parseFloat( document.getElementById("valor_2").value );
+				var valor_3 = parseFloat( document.getElementById("valor_3").value );
+
+		if(isNaN(valor_1) || isNaN(valor_2)|| isNaN(valor_3)){
+		
+		document.getElementById("velocidade").innerHTML = "Entre com todos os valores!";
+		
+		}else{
+
+			var Trabalho = valor_1 * valor_2 * Math.cos((valor_3 * Math.PI )/ 180);
+
+			document.getElementById("velocidade").innerHTML = "O trabalho total é: " + Trabalho.toFixed(3) + " Joules";
+
+
+
+      }}
+    </script>
+</html>
